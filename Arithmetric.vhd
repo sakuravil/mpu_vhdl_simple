@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity ManoArithmetic is
+entity Arithmetic is
 	PORT( A : in std_logic_vector( 7 downto 0 );
 			B : in std_logic_vector( 7 downto 0 );
 			S0 : in std_logic;
@@ -10,9 +10,9 @@ entity ManoArithmetic is
 			F : out std_logic_vector( 7 downto 0 );
 			COUT : out std_logic);
 			
-end ManoArithmetic;
+end Arithmetic;
 
-architecture Behavioral of ManoArithmetic is
+architecture Behavioral of Arithmetic is
 	
 	COMPONENT Obitfulladder
 	PORT(

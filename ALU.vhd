@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity ManoALU is
+entity ALU is
 	PORT( A : in std_logic_vector(7 downto 0);
 			B : in std_logic_vector(7 downto 0);
 			S2 : in std_logic;
@@ -14,11 +14,11 @@ entity ManoALU is
 			COUT : out std_logic;
 			SOUT : out std_logic);
 			
-end ManoALU;
+end ALU;
 
-architecture Behavioral of ManoALU is
+architecture Behavioral of ALU is
 
-	COMPONENT ManoArithmetic
+	COMPONENT Arithmetic
 	PORT(
 		A : IN std_logic_vector(7 downto 0);
 		B : IN std_logic_vector(7 downto 0);
@@ -30,7 +30,7 @@ architecture Behavioral of ManoALU is
 		);
 	END COMPONENT;
 	
-	COMPONENT ManoLogic
+	COMPONENT Logic
 	PORT(
 		A : IN std_logic_vector(7 downto 0);
 		B : IN std_logic_vector(7 downto 0);
@@ -40,7 +40,7 @@ architecture Behavioral of ManoALU is
 		);
 	END COMPONENT;
 	
-	COMPONENT ManoRotate
+	COMPONENT Rotate
 	PORT(
 		G : IN std_logic_vector(7 downto 0);
 		H1 : IN std_logic;
@@ -55,7 +55,7 @@ architecture Behavioral of ManoALU is
 	signal G3 : std_logic_vector(7 downto 0);
 	--attribute KEEP of G2 : signal is "TRUE";
 begin
-	arithmetic: ManoArithmetic PORT MAP(
+	arithmetic: Arithmetic PORT MAP(
 		A => A,
 		B => B,
 		S0 => S0,
@@ -64,7 +64,7 @@ begin
 		F => G1,
 		COUT => COUT
 	);
-	logic: ManoLogic PORT MAP(
+	logic: Logic PORT MAP(
 		A => A,
 		B => B,
 		S1 => S1,
@@ -75,7 +75,7 @@ begin
 	G3 <= G1 when(S2 = '0') else
 			G2;
 			
-	rotate: ManoRotate PORT MAP(
+	rotate: Rotate PORT MAP(
 		G => G3,
 		H1 => H1,
 		H0 => H0,
